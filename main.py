@@ -63,21 +63,28 @@ class player:
 
 ###main code
 if __name__ == "__main__":
-    #creating and showing a play grid
+    #take inputs here
     with open("input.txt",  "r") as file:
-        line_one = file.readline()
-        line_one = line_one.split()
-        hight = int(line_one[-1])
-        line_two = file.readline()
-        line_two = line_two.split()
-        width = int(line_two[-1])
-    grid = functions.generate_grid(hight, width)
+        raw_input = []
+        clener = []
+        clean_input = {}
+        for line in range(3):
+            raw_input.append(file.readline().strip().split())
+        for i in range(len(raw_input)):
+            clener = raw_input[i][0].split(":")
+            clean_input[clener[0]] = int(raw_input[i][1])
+        height = clean_input["grid_height"]
+        width = clean_input["grid_width"]
+
+
+
+    grid = functions.generate_grid(height, width)
     with open("output.txt", "w") as file:
         display_grid = grid
         for i in range(len(grid)):
             for j in range(len(grid[i])):
                 for y in range(len(grid[i][j])):
-                    if len(str(display_grid[i][j][y])) < (len(str(hight)) or len(str(width))):
+                    if len(str(display_grid[i][j][y])) < (len(str(height)) or len(str(width))):
                         display_grid[i][j][y] = f"0{display_grid[i][j][y]}"
                     else:
                         display_grid[i][j][y] = f"{display_grid[i][j][y]}"
@@ -88,6 +95,20 @@ if __name__ == "__main__":
             else:
                 temp_str = f"{display_grid[i]}"
             file.write(f"{temp_str} \n")
-    #setting 
-    
-     
+    #setting
+    #player handling 
+    amount_players = clean_input["num_characters"]
+    player_dict = {}
+    for i in range(amount_players):
+        name = functions.generate_name()
+        play = player()
+        play.set_name(name)
+        player_dict[name] = play
+    with open("output.txt", "a") as file:
+        read_players = list(player_dict.keys())
+        
+       
+        for i in range(len(read_players)):
+            #read_players[i] = read_players[i].strip()
+            file.write(f"{read_players[i]}\n")
+        print(read_players)

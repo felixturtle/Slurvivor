@@ -1,2 +1,3 @@
-grid hight: 3
-grid width: 3
+grid_height: 3
+grid_width: 3
+num_characters: 4

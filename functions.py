@@ -58,7 +58,7 @@ def generate_name():
             last_list.append(i)
     first_ind = random.randint(0, (len(first_list)))
     last_ind = random.randint(0, (len(last_list)))
-    name = f"{first_list[first_ind]}{last_list[last_ind]}"
+    name = f"{first_list[first_ind].strip()} {last_list[last_ind].strip()}"
     return(name)
 
 
